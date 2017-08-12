@@ -377,6 +377,14 @@ void eraseBottom() {
 void printIntTemperature(int temperature, int textSize, int degreeSize) {
 
   tft.setTextColor(pickColor(temperature));
+  // Maybe there isn't enough memory on the Yun for the custom fonts
+/*  if (textSize == DefaultTextSize) {
+    tft.setFont(&ArialRoundedMTBold_36);
+    tft.setTextSize(1);
+  } else {
+    tft.setFont(&ArialRoundedMTBold_14);
+    tft.setTextSize(1);
+  }*/
   tft.setTextSize(textSize);
   if (temperature < 100) {
     // if not triple digit temp need to pad at the front

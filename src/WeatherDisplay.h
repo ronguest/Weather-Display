@@ -9,7 +9,6 @@
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
 #include "Conditions.h"
-#include "ArialRoundedMTBold_36.h"
 
 /*
  *  Defines key constants for the Weahter Display app
