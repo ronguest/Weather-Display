@@ -3,5 +3,5 @@
 .clang_complete
 .gcc-flags.json
 credentials.h
-Notes.txt
-upload_instructions.txt
+Notes.md
+upload_instructions.md
