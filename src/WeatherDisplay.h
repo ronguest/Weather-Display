@@ -8,6 +8,7 @@
 #include "SPI.h"
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
+#include <Adafruit_FT6206.h>      // for capacitive touch TFT
 #include "Conditions.h"
 
 /*
@@ -44,9 +45,9 @@ const int forecastTextSize = 5;
 const int extrasTextSize = 3;
 const int extrasTextColor = ILI9341_GREEN;
 
-const unsigned long oneMinute = 60L*1000L;   // One minute is how often we check to see if door still open/closed
-const int updateMinutes=2;                      // How often to update the display
-const int bottomSeconds=5;
+/*const unsigned long oneMinute = 60L*1000L;   // One minute
+const int updateMinutes=2;                   // How often to update the display
+const int bottomSeconds=5;*/
 
 // Get a couple of useful metrics on the screen
 int tftWidth;
@@ -64,9 +65,15 @@ const int separatorWidth = 2;
 // For the Adafruit shield, these are the default.
 #define TFT_DC 9
 #define TFT_CS 10
+//#define STMPE_CS 8      // For my capacitive touch TFT on Cyclops
 
 // Use hardware SPI (on Uno, #13, #12, #11) and the above for CS/DC
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
+//Adafruit_STMPE610 ts = Adafruit_STMPE610(STMPE_CS);// for resistive touch TFT
+Adafruit_FT6206 ts = Adafruit_FT6206();// for capacitive touch TFT
+
+boolean reDrawBottom = true;
+const int UPDATE_INTERVAL_SECS = 10L * 60L;  // Update Conditions every 10 minutes, others update once/hour
 
 // Global storage for weather conditions
 Conditions todayConditions = Conditions();

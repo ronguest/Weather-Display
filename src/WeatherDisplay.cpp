@@ -15,10 +15,20 @@ http://www.wunderground.com/weather/api/d/436da0958aa624c8/edit.html
 
 #include "WeatherDisplay.h"
 
+long lastDownloadUpdate = -(1000L * UPDATE_INTERVAL_SECS)-1;    // Forces initial screen draw
+
 void setup() {
   Bridge.begin();
   Console.begin();
   FileSystem.begin();
+
+  Console.println("capacitive TFT");
+  if (!ts.begin()) {
+    Console.println("Couldn't start touchscreen controller");
+    while (1);
+  }
+  Console.println("Touchscreen started");
+
   tft.begin();
 
   // Rotate the display 180 degrees so the power cable comes out on the bottom
@@ -40,27 +50,33 @@ void setup() {
 }
 
 void loop(void) {
-  // Clear the screen
-  tft.fillScreen(ILI9341_BLACK);
-  tft.setCursor(0, 0);
+  // Check if we should update weather information
+  if ((millis() - lastDownloadUpdate) > (1000L * UPDATE_INTERVAL_SECS)) {
+    reDrawBottom = true;
+    lastDownloadUpdate = millis();
 
-  // Load the latest weather data every updateMinutes
-  loadData();
+    // Clear the screen
+    tft.fillScreen(ILI9341_BLACK);
+    tft.setCursor(0, 0);
 
-  // Display the current temperature and today's forecast
-  displayHeader(F("    TODAY"));
-  displayCurrent();
-  displayTodaysForecast();
+    // Load the latest weather data every updateMinutes
+    loadData();
 
-  // Display the bottom content - alternating between the choices every bottomSeconds
-  // This also means data (which is loaded above) is updated once every updateMinutes
-  for (int i=0; i < ((updateMinutes*60))/bottomSeconds; i++) {
-    // Set location to draw bottom text
+    // Display the current temperature
+    displayHeader(F("    TODAY"));
+    displayCurrent();
+    displayTodaysForecast();
+  }
+
+  // If user touches screen, toggle bottom display values
+  // If reDrawBottom true then just draw the bottom again, don't change mode
+  if (ts.touched() || reDrawBottom) {
+    eraseBottom();
     tft.setCursor(0, tftMiddle+separatorWidth);
     switch (bottom) {
       case todayExtras:          // Display humidity and expected conditions today
         displayTodaysExtras();
-        bottom = tomorrow;       // Change content for next iteration of bottom display
+        if (!reDrawBottom) bottom = tomorrow;       // Change content for next iteration of bottom display
         break;
       case tomorrow:             // Display tomorrow's forecast
         //drawSeparator();
@@ -69,20 +85,17 @@ void loop(void) {
         //tft.println();
         displayHeader(F("  TOMORROW"));
         displayTomorrowsForecast();
-        bottom = indoor;        // Change content for next iteration of bottom display
+        if (!reDrawBottom) bottom = indoor;        // Change content for next iteration of bottom display
         break;
       case indoor:              // Display indoor temp and humidity
         tft.setTextSize(1);
         tft.println();
         displayHeader(F("   INDOOR"));
         displayIndoor();
-        bottom = todayExtras;
+        if (!reDrawBottom) bottom = todayExtras;
         break;
     }
-    // Leave the bottom content for bottomSeconds
-    delay(bottomSeconds*1000);
-    // Erase the bottom
-    eraseBottom();
+    reDrawBottom = false;
   }
 }
 
@@ -377,14 +390,6 @@ void eraseBottom() {
 void printIntTemperature(int temperature, int textSize, int degreeSize) {
 
   tft.setTextColor(pickColor(temperature));
-  // Maybe there isn't enough memory on the Yun for the custom fonts
-/*  if (textSize == DefaultTextSize) {
-    tft.setFont(&ArialRoundedMTBold_36);
-    tft.setTextSize(1);
-  } else {
-    tft.setFont(&ArialRoundedMTBold_14);
-    tft.setTextSize(1);
-  }*/
   tft.setTextSize(textSize);
   if (temperature < 100) {
     // if not triple digit temp need to pad at the front
