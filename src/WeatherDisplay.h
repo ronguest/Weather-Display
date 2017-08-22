@@ -8,7 +8,7 @@
 #include "SPI.h"
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
-#include <Adafruit_STMPE610.h>
+#include <Adafruit_FT6206.h>      // for capacitive touch TFT
 #include "Conditions.h"
 
 /*
@@ -65,11 +65,12 @@ const int separatorWidth = 2;
 // For the Adafruit shield, these are the default.
 #define TFT_DC 9
 #define TFT_CS 10
-#define STMPE_CS 8      // For my resistive touch TFT on Yun
+//#define STMPE_CS 8      // For my capacitive touch TFT on Cyclops
 
 // Use hardware SPI (on Uno, #13, #12, #11) and the above for CS/DC
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
-Adafruit_STMPE610 ts = Adafruit_STMPE610(STMPE_CS);
+//Adafruit_STMPE610 ts = Adafruit_STMPE610(STMPE_CS);// for resistive touch TFT
+Adafruit_FT6206 ts = Adafruit_FT6206();// for capacitive touch TFT
 
 // Global storage for weather conditions
 Conditions todayConditions = Conditions();
