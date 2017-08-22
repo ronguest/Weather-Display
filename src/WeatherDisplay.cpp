@@ -15,12 +15,20 @@ http://www.wunderground.com/weather/api/d/436da0958aa624c8/edit.html
 
 #include "WeatherDisplay.h"
 
-long lastDownloadUpdate = millis();
+long lastDownloadUpdate = 0;
 
 void setup() {
   Bridge.begin();
   Console.begin();
   FileSystem.begin();
+
+/*  Serial.println("FeatherWing TFT");
+  if (!ts.begin()) {
+    Serial.println("Couldn't start touchscreen controller");
+    while (1);
+  }
+  Serial.println("Touchscreen started");*/
+
   tft.begin();
 
   // Rotate the display 180 degrees so the power cable comes out on the bottom
@@ -42,10 +50,21 @@ void setup() {
 }
 
 void loop(void) {
+  // Clear the screen
+  tft.fillScreen(ILI9341_BLACK);
+  tft.setCursor(0, 0);
+
+  // Load the latest weather data every updateMinutes
+  loadData();
+
+  // Display the current temperature and today's forecast
+  displayHeader(F("    TODAY"));
+  displayCurrent();
+
   // Check if we should update weather information
-  if (millis() - lastDownloadUpdate > 1000 * UPDATE_INTERVAL_SECS) {
+  /*if (millis() - lastDownloadUpdate > 1000 * UPDATE_INTERVAL_SECS) {
     // Always display tomorrow's forecast after an update
-    bottom = tomorrow;
+    bottom = todayExtras;
     reDrawBottom = true;
     lastDownloadUpdate = millis();
 
@@ -59,8 +78,8 @@ void loop(void) {
     // Display the current temperature and today's forecast
     displayHeader(F("    TODAY"));
     displayCurrent();
-    displayTodaysForecast();
-  }
+    //displayTodaysForecast();
+  }*/
 
   // If user touches screen, toggle bottom display values
   if (ts.touched() || reDrawBottom) {
@@ -88,8 +107,16 @@ void loop(void) {
         displayIndoor();
         bottom = todayExtras;
         break;
+      case forecast:              // Display indoor temp and humidity
+        //tft.setTextSize(1);
+        //tft.println();
+        //displayHeader(F("   INDOOR"));
+        displayTodaysForecast();
+        bottom = todayExtras;
+        break;
     }
   }
+  delay(10);
 }
 
 // Load all the data
