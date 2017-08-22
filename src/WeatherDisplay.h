@@ -9,7 +9,6 @@
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
 #include <Adafruit_FT6206.h>      // for capacitive touch TFT
-#include "fonts/FreeMonoBold24pt7b.h"
 #include "Conditions.h"
 
 /*
@@ -46,9 +45,9 @@ const int forecastTextSize = 5;
 const int extrasTextSize = 3;
 const int extrasTextColor = ILI9341_GREEN;
 
-const unsigned long oneMinute = 60L*1000L;   // One minute is how often we check to see if door still open/closed
-const int updateMinutes=2;                      // How often to update the display
-const int bottomSeconds=5;
+/*const unsigned long oneMinute = 60L*1000L;   // One minute
+const int updateMinutes=2;                   // How often to update the display
+const int bottomSeconds=5;*/
 
 // Get a couple of useful metrics on the screen
 int tftWidth;
@@ -74,7 +73,7 @@ Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 Adafruit_FT6206 ts = Adafruit_FT6206();// for capacitive touch TFT
 
 boolean reDrawBottom = true;
-const int UPDATE_INTERVAL_SECS = 10 * 60;  // Update Conditions every 10 minutes, others update once/hour
+const int UPDATE_INTERVAL_SECS = 10L * 60L;  // Update Conditions every 10 minutes, others update once/hour
 
 // Global storage for weather conditions
 Conditions todayConditions = Conditions();
