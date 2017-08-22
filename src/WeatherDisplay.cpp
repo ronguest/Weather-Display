@@ -19,6 +19,15 @@ void setup() {
   Bridge.begin();
   Console.begin();
   FileSystem.begin();
+
+  delay(4000);
+
+  Console.println("Try to initialize touch screen");
+  if (!ts.begin()) {
+    Console.println("Couldn't start touchscreen controller");
+    //while (1);
+  }
+  Console.println("Touchscreen started");
   tft.begin();
 
   // Rotate the display 180 degrees so the power cable comes out on the bottom
