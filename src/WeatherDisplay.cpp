@@ -15,6 +15,8 @@ http://www.wunderground.com/weather/api/d/436da0958aa624c8/edit.html
 
 #include "WeatherDisplay.h"
 
+long lastDownloadUpdate = millis();
+
 void setup() {
   Bridge.begin();
   Console.begin();
@@ -40,22 +42,30 @@ void setup() {
 }
 
 void loop(void) {
-  // Clear the screen
-  tft.fillScreen(ILI9341_BLACK);
-  tft.setCursor(0, 0);
+  // Check if we should update weather information
+  if (millis() - lastDownloadUpdate > 1000 * UPDATE_INTERVAL_SECS) {
+    // Always display tomorrow's forecast after an update
+    bottom = tomorrow;
+    reDrawBottom = true;
+    lastDownloadUpdate = millis();
 
-  // Load the latest weather data every updateMinutes
-  loadData();
+    // Clear the screen
+    tft.fillScreen(ILI9341_BLACK);
+    tft.setCursor(0, 0);
 
-  // Display the current temperature and today's forecast
-  displayHeader(F("    TODAY"));
-  displayCurrent();
-  displayTodaysForecast();
+    // Load the latest weather data every updateMinutes
+    loadData();
 
-  // Display the bottom content - alternating between the choices every bottomSeconds
-  // This also means data (which is loaded above) is updated once every updateMinutes
-  for (int i=0; i < ((updateMinutes*60))/bottomSeconds; i++) {
-    // Set location to draw bottom text
+    // Display the current temperature and today's forecast
+    displayHeader(F("    TODAY"));
+    displayCurrent();
+    displayTodaysForecast();
+  }
+
+  // If user touches screen, toggle bottom display values
+  if (ts.touched() || reDrawBottom) {
+    eraseBottom();
+    reDrawBottom = false;
     tft.setCursor(0, tftMiddle+separatorWidth);
     switch (bottom) {
       case todayExtras:          // Display humidity and expected conditions today
@@ -79,10 +89,6 @@ void loop(void) {
         bottom = todayExtras;
         break;
     }
-    // Leave the bottom content for bottomSeconds
-    delay(bottomSeconds*1000);
-    // Erase the bottom
-    eraseBottom();
   }
 }
 
