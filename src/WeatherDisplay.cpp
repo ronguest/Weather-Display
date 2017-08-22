@@ -22,12 +22,12 @@ void setup() {
   Console.begin();
   FileSystem.begin();
 
-/*  Serial.println("FeatherWing TFT");
+  Console.println("capacitive TFT");
   if (!ts.begin()) {
-    Serial.println("Couldn't start touchscreen controller");
+    Console.println("Couldn't start touchscreen controller");
     while (1);
   }
-  Serial.println("Touchscreen started");*/
+  Console.println("Touchscreen started");
 
   tft.begin();
 
@@ -50,19 +50,8 @@ void setup() {
 }
 
 void loop(void) {
-  // Clear the screen
-  tft.fillScreen(ILI9341_BLACK);
-  tft.setCursor(0, 0);
-
-  // Load the latest weather data every updateMinutes
-  loadData();
-
-  // Display the current temperature and today's forecast
-  displayHeader(F("    TODAY"));
-  displayCurrent();
-
   // Check if we should update weather information
-  /*if (millis() - lastDownloadUpdate > 1000 * UPDATE_INTERVAL_SECS) {
+  if (millis() - lastDownloadUpdate > 1000 * UPDATE_INTERVAL_SECS) {
     // Always display tomorrow's forecast after an update
     bottom = todayExtras;
     reDrawBottom = true;
@@ -79,7 +68,7 @@ void loop(void) {
     displayHeader(F("    TODAY"));
     displayCurrent();
     //displayTodaysForecast();
-  }*/
+  }
 
   // If user touches screen, toggle bottom display values
   if (ts.touched() || reDrawBottom) {
