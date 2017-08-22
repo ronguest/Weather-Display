@@ -9,6 +9,7 @@
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
 #include <Adafruit_FT6206.h>      // for capacitive touch TFT
+#include "fonts/FreeMonoBold24pt7b.h"
 #include "Conditions.h"
 
 /*

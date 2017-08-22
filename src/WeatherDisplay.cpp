@@ -76,6 +76,13 @@ void loop(void) {
     reDrawBottom = false;
     tft.setCursor(0, tftMiddle+separatorWidth);
     switch (bottom) {
+      case forecast:              // Display indoor temp and humidity
+        //tft.setTextSize(1);
+        //tft.println();
+        //displayHeader(F("   INDOOR"));
+        displayTodaysForecast();
+        bottom = todayExtras;
+        break;
       case todayExtras:          // Display humidity and expected conditions today
         displayTodaysExtras();
         bottom = tomorrow;       // Change content for next iteration of bottom display
@@ -94,14 +101,7 @@ void loop(void) {
         tft.println();
         displayHeader(F("   INDOOR"));
         displayIndoor();
-        bottom = todayExtras;
-        break;
-      case forecast:              // Display indoor temp and humidity
-        //tft.setTextSize(1);
-        //tft.println();
-        //displayHeader(F("   INDOOR"));
-        displayTodaysForecast();
-        bottom = todayExtras;
+        bottom = forecast;
         break;
     }
   }
@@ -399,15 +399,14 @@ void eraseBottom() {
 void printIntTemperature(int temperature, int textSize, int degreeSize) {
 
   tft.setTextColor(pickColor(temperature));
-  // Maybe there isn't enough memory on the Yun for the custom fonts
-/*  if (textSize == DefaultTextSize) {
-    tft.setFont(&ArialRoundedMTBold_36);
-    tft.setTextSize(1);
+  // Maybe there isn't enough memory on the Yun for the custom font
+  if (textSize == forecastTextSize) {
+    tft.setFont(&FreeMonoBold24pt7b);
+    //tft.setTextSize(1);
   } else {
-    tft.setFont(&ArialRoundedMTBold_14);
-    tft.setTextSize(1);
-  }*/
-  tft.setTextSize(textSize);
+    tft.setTextSize(textSize);
+  }
+  //tft.setTextSize(textSize);
   if (temperature < 100) {
     // if not triple digit temp need to pad at the front
     tft.print(" ");
@@ -420,6 +419,7 @@ void printIntTemperature(int temperature, int textSize, int degreeSize) {
   // Reduce the text size and print a 'o' small like a degree symbol
   tft.setTextSize(degreeSize);
   tft.print("o");
+  tft.setFont();
 }
 
 // Reads the string value from the specified file
