@@ -65,6 +65,7 @@ void loop(void) {
     // Display the current temperature
     displayHeader(F("    TODAY"));
     displayCurrent();
+    displayTodaysForecast();
   }
 
   // If user touches screen, toggle bottom display values
@@ -73,11 +74,6 @@ void loop(void) {
     eraseBottom();
     tft.setCursor(0, tftMiddle+separatorWidth);
     switch (bottom) {
-      case forecast:              // Display indoor temp and humidity
-        displayTodaysForecast();
-        displayTodaysExtras();
-        if (!reDrawBottom) bottom = todayExtras;
-        break;
       case todayExtras:          // Display humidity and expected conditions today
         displayTodaysExtras();
         if (!reDrawBottom) bottom = tomorrow;       // Change content for next iteration of bottom display
@@ -96,7 +92,7 @@ void loop(void) {
         tft.println();
         displayHeader(F("   INDOOR"));
         displayIndoor();
-        if (!reDrawBottom) bottom = forecast;
+        if (!reDrawBottom) bottom = todayExtras;
         break;
     }
     reDrawBottom = false;

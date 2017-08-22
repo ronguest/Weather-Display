@@ -35,8 +35,8 @@
 
 // Used to set what the bottom area of the screen should display
 // Using an enum in case I decide to add more options
-enum bottomContent { todayExtras, tomorrow, indoor, forecast };
-bottomContent bottom = forecast;
+enum bottomContent { todayExtras, tomorrow, indoor };
+bottomContent bottom = todayExtras;
 
 // This is the size used for the current temperature - it is the largest size used in this sketch
 // The size of other text is relative to this size
