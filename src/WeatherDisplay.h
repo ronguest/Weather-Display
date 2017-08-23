@@ -11,11 +11,8 @@
 #include <Adafruit_FT6206.h>      // for capacitive touch TFT
 #include "Conditions.h"
 
-/*
- *  Defines key constants for the Weahter Display app
- */
-
 // To keep the Arduino code simple each bit of data is stored in it's own text file
+// The parsing is done on the Linux side
 // I believe opening and reading from the SD card is slow. However for a weather display application
 // the performance isn't important
 #define TemperatureFileName "/mnt/sd/temperature.txt"
@@ -40,6 +37,7 @@ bottomContent bottom = todayExtras;
 
 // This is the size used for the current temperature - it is the largest size used in this sketch
 // The size of other text is relative to this size
+// There doesn't seem to be enough memory to actually use different fonts instead of scaling
 const int DefaultTextSize = 9;
 const int forecastTextSize = 5;
 const int extrasTextSize = 3;
@@ -59,7 +57,7 @@ int tftMiddle;
 const int separatorWidth = 2;
 
 // We want to use orange text but there is no pre-defined code for that
-// But every thing I have tried for Orange is very dim on the screen and not easily readible
+// But every thing I have tried for Orange is very dim on the screen and not easily readable
 #define ORANGE 0xFF8C00
 
 // For the Adafruit shield, these are the default.
