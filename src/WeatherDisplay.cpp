@@ -76,23 +76,19 @@ void loop(void) {
     switch (bottom) {
       case todayExtras:          // Display humidity and expected conditions today
         displayTodaysExtras();
-        if (!reDrawBottom) bottom = tomorrow;       // Change content for next iteration of bottom display
+        if (!reDrawBottom) bottom = tomorrow;       // Was touched, change content for next iteration of bottom display
         break;
       case tomorrow:             // Display tomorrow's forecast
-        //drawSeparator();
-        // Add a spacer below the separator line so the text doesn't touch the line
-        //tft.setTextSize(1);
-        //tft.println();
         displayHeader(F("  TOMORROW"));
         displayTomorrowsForecast();
-        if (!reDrawBottom) bottom = indoor;        // Change content for next iteration of bottom display
+        if (!reDrawBottom) bottom = indoor;        // Was touched, change content for next iteration of bottom display
         break;
       case indoor:              // Display indoor temp and humidity
         tft.setTextSize(1);
         tft.println();
         displayHeader(F("   INDOOR"));
         displayIndoor();
-        if (!reDrawBottom) bottom = todayExtras;
+        if (!reDrawBottom) bottom = todayExtras;  // Was touched, change content for next iteration of bottom display
         break;
     }
     reDrawBottom = false;
