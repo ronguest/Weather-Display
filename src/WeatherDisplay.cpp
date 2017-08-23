@@ -52,7 +52,7 @@ void setup() {
 void loop(void) {
   // Check if we should update weather information
   if ((millis() - lastDownloadUpdate) > (1000L * UPDATE_INTERVAL_SECS)) {
-    reDrawBottom = true;
+    reDrawBottom = true;                  // Mark to redraw bottom after weather updates
     lastDownloadUpdate = millis();
 
     // Clear the screen
@@ -65,30 +65,43 @@ void loop(void) {
     // Display the current temperature
     displayHeader(F("    TODAY"));
     displayCurrent();
-    displayTodaysForecast();
+    displayTodaysForecast();    // Add the forecast high & low, this is in the top half of the display
   }
 
   // If user touches screen, toggle bottom display values
-  // If reDrawBottom true then just draw the bottom again, don't change mode
-  if (ts.touched() || reDrawBottom) {
+  if (ts.touched()) {
+    reDrawBottom = true;                // Mark to redraw bottom if screen was touched
+    switch (bottom) {
+      case todayExtras:
+        bottom = tomorrow;
+        break;
+      case tomorrow:
+        bottom = indoor;
+        break;
+      case indoor:
+        bottom = todayExtras;
+        break;
+      default:
+        bottom = todayExtras;
+        break;
+    }
+  }
+  if (reDrawBottom) {
     eraseBottom();
     tft.setCursor(0, tftMiddle+separatorWidth);
     switch (bottom) {
-      case todayExtras:          // Display humidity and expected conditions today
+      case todayExtras:                           // Display humidity and expected conditions today
         displayTodaysExtras();
-        if (!reDrawBottom) bottom = tomorrow;       // Was touched, change content for next iteration of bottom display
         break;
-      case tomorrow:             // Display tomorrow's forecast
+      case tomorrow:                              // Display tomorrow's forecast
         displayHeader(F("  TOMORROW"));
         displayTomorrowsForecast();
-        if (!reDrawBottom) bottom = indoor;        // Was touched, change content for next iteration of bottom display
         break;
-      case indoor:              // Display indoor temp and humidity
+      case indoor:                                 // Display indoor temp and humidity
         tft.setTextSize(1);
         tft.println();
         displayHeader(F("   INDOOR"));
         displayIndoor();
-        if (!reDrawBottom) bottom = todayExtras;  // Was touched, change content for next iteration of bottom display
         break;
     }
     reDrawBottom = false;
