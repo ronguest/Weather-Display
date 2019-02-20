@@ -3,5 +3,13 @@
 .clang_complete
 .gcc-flags.json
 credentials.h
+get_pin+code.py
+get_token.py
+PIN
+CODE
+TOKEN
+REFRESH_TOKEN
+iconset9
+iconset11
 Notes.md
 upload_instructions.md

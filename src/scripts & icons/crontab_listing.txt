@@ -1,0 +1,3 @@
+*/5 * * * * /mnt/sd/get_conditions.py
+*/15 * * * * /mnt/sd/ecobee/get_data.py
+06,36 * * * * /mnt/sd/get_forecast.py

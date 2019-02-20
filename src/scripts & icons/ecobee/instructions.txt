@@ -1,0 +1,4 @@
+1. Run get_pin+code.py which saves everything in files
+2. Use the PIN in the ecobee web interface to add the app
+3. Then run get_token.py to get the token to use in making read requests
+4. Then run get_data.py to grab the thermostate data
