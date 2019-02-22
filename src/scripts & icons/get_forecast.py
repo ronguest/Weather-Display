@@ -8,7 +8,7 @@ import json
 #
 # Get the forecast via a URL from weatherunderground
 #
-f = urllib2.urlopen('http://api.wunderground.com/api/436da0958aa624c8/forecast/q/TX/Allen.json')
+f = urllib2.urlopen('http://api.wunderground.com/api/$WU_KEY/forecast/q/TX/Allen.json')
 json_string = f.read()
 parsed_json = json.loads(json_string)
 
@@ -64,4 +64,3 @@ icon = parsed_json['forecast']['simpleforecast']['forecastday'][1]['icon']
 output = open("/mnt/sd/tomorrow_icon.txt", "w")
 print >> output, "/mnt/sd/iconset9/"+icon+".bmp"
 output.close()
-
