@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 
-#include "credentials.h"
-
 import urllib2
 import json
-#f = open("conditions.json", "r")
-#
-# Get the current conditions via a URL from weatherunderground
-#
-f = urllib2.urlopen('http://api.wunderground.com/api/$WU_KEY/conditions/q/pws:KTXALLEN99.json')
+#import keys
+import credentials
+
+URL='http://api.wunderground.com/api/'+credentials.WU_API_KEY+'/conditions/q/pws:KTXALLEN99.json'
+#f = urllib2.urlopen('http://api.wunderground.com/api/$WU_KEY/conditions/q/pws:KTXALLEN99.json')
+f = urllib2.urlopen(URL)
 json_string = f.read()
 parsed_json = json.loads(json_string)
 #

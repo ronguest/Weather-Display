@@ -1,14 +1,12 @@
 #!/usr/bin/env python
 
-#include "credentials.h"
-
 import urllib2
 import json
-#f = open("forecast.json", "r")
-#
-# Get the forecast via a URL from weatherunderground
-#
-f = urllib2.urlopen('http://api.wunderground.com/api/$WU_KEY/forecast/q/TX/Allen.json')
+#import keys
+import credentials
+
+URL='http://api.wunderground.com/api/'+credentials.WU_API_KEY+'/forecast/q/TX/Allen.json'
+f = urllib2.urlopen(URL)
 json_string = f.read()
 parsed_json = json.loads(json_string)
 
