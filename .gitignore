@@ -3,6 +3,8 @@
 .clang_complete
 .gcc-flags.json
 credentials.h
+credentials.py
+credentials.pyc
 get_pin+code.py
 get_token.py
 PIN

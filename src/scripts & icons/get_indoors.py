@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#include "credentials.h"
+import credentials
 
 import urllib2
 import json
@@ -8,29 +8,39 @@ import json
 #
 # Get the current conditions via a URL from weatherunderground
 #
-f = urllib2.urlopen('http://api.wunderground.com/api/$WU_KEY/conditions/q/pws:KTXALLEN99.json')
+
+#print "WU key ="+credentials.WU_API_KEY+"-"
+URL='https://api.ambientweather.net/v1/devices/08:D8:33:44:63:13?applicationKey='+credentials.AW_APP_KEY+'&apiKey='+credentials.AW_API_KEY+'&limit=1'
+#print URL
+#exit()
+
+f = urllib2.urlopen(URL)
 json_string = f.read()
 parsed_json = json.loads(json_string)
+
+#print json.dumps(parsed_json, indent=4)
+#print parsed_json
+for key in parsed_json:
+    if key["tempinf"]:
+        #print "Found it!"
+        print "Indoor temperature is",key["tempinf"]
+
+#temp_f = parsed_json["tempinf"]
+#print temp_f
+exit()
 #
 # Write the temperature
 #
-temp_f = parsed_json['current_observation']['temp_f']
-output = open("/mnt/sd/temperature.txt", "w")
+temp_f = parsed_json['AW_my_data_json'][0]['tempinf']
+#output = open("/mnt/sd/inside_temp.txt", "w")
 print >> output, temp_f
 output.close()
 #
 # Write humidity
 #
-humidity = parsed_json['current_observation']['relative_humidity']
-output = open("/mnt/sd/humidity.txt", "w")
+humidity = parsed_json['current_observation'][0]['humidityin']
+#output = open("/mnt/sd/inside_humidity.txt", "w")
 print >> output, humidity
-output.close()
-#
-# Write conditions icon file name
-#
-icon = parsed_json['current_observation']['icon']
-output = open("/mnt/sd/current_icon.txt", "w")
-print >> output, "/mnt/sd/iconset9/"+icon+".bmp"
 output.close()
 
 f.close()
