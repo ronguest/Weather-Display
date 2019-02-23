@@ -19,9 +19,7 @@ for key in parsed_json:
         tempin_f = key["tempinf"]
 output = open("/mnt/sd/inside_temp.txt", "w")
 #output = open("inside_temp.txt", "w")
-# Round up since truncating to 2 digits
-tempin_f += 0.5
-print >> output, "%2d" % tempin_f
+print >> output, tempin_f
 output.close()
 
 #
@@ -32,7 +30,7 @@ for key in parsed_json:
         humidityin = key["humidityin"]
 output = open("/mnt/sd/inside_humidity.txt", "w")
 #output = open("inside_humidity.txt", "w")
-print >> output, "%2d" % humidityin
+print >> output, humidityin
 output.close()
 
 f.close()

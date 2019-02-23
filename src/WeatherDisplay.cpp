@@ -205,14 +205,8 @@ void loadIndoor() {
   // Get indoor conditions: temp and humidity
   File inTempFile = FileSystem.open(InsideTemperatureFileName, FILE_READ);
   if (readFile(inTempFile, value)) {
-    // The Arduino UNO+XBee reports temp with a tenth after a period as in 76.1
-    // The Ecobee API reports without the period but with the tenth, as in 761
-    // so if using the Ecobee for indoor conditions need to get the float and then divide by ten
-    // Need to round the indoor temperature
     //Console.print("Ins temp value is ");Console.println(value);
     float f = value.toFloat();
-    //Console.print("Inside temp ");Console.println(f);
-    f = f / 10.0f;    // Comment this out if not using the Ecobee, see comment above, as ecobee reports 76.1 sa 761
     //Console.print("Inside temp / 10 ");Console.println(f);
     f = f + 0.5f;
     //Console.print("Rounded temp ");Console.println(f);
