@@ -19,6 +19,8 @@ for key in parsed_json:
         tempin_f = key["tempinf"]
 output = open("/mnt/sd/inside_temp.txt", "w")
 #output = open("inside_temp.txt", "w")
+# Round up since truncating to 2 digits
+tempin_f += 0.5
 print >> output, "%2d" % tempin_f
 output.close()
 
