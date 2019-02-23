@@ -19,7 +19,7 @@ for key in parsed_json:
         tempin_f = key["tempinf"]
 output = open("/mnt/sd/inside_temp.txt", "w")
 #output = open("inside_temp.txt", "w")
-print >> output, tempin_f
+print >> output, "%2d" % tempin_f
 output.close()
 
 #
@@ -30,7 +30,7 @@ for key in parsed_json:
         humidityin = key["humidityin"]
 output = open("/mnt/sd/inside_humidity.txt", "w")
 #output = open("inside_humidity.txt", "w")
-print >> output, humidityin
+print >> output, "%2d" % humidityin
 output.close()
 
 f.close()
