@@ -29,7 +29,7 @@ print >> output, pop
 output.close()
 
 # Today's short conditions phrase
-conditions = parsed_json['narrative'][0]
+conditions = parsed_json['daypart'][0]['wxPhraseShort'][0]
 output = open("/mnt/sd/todays_conditions.txt", "w")
 print >> output, conditions
 output.close()
@@ -52,7 +52,7 @@ print >> output, pop
 output.close()
 
 # Tomorrow's short conditions phrase
-conditions = parsed_json['narrative'][1]
+conditions = parsed_json['daypart'][0]['wxPhraseShort'][2]
 output = open("/mnt/sd/tomorrows_conditions.txt", "w")
 print >> output, conditions
 output.close()
