@@ -59,9 +59,11 @@ output.close()
 
 # Tomorrow's short conditions icon
 # The WU Icon PNG/BMP folders contain the official icons corresponding to the iconCode
+# NOTE the folder name here makes no sense - but also the icon info is not actually used in this project
+# Need to address this if I want to actually display icons. But this CPU+Display is too slow for that.
 icon = parsed_json['daypart'][0]['iconCode'][2]
 output = open("/mnt/sd/tomorrow_icon.txt", "w")
-print >> output, "/mnt/sd/iconset9/"+icon+".bmp"
+print >> output, "/mnt/sd/iconset9/"+str(icon)+".bmp"
 output.close()
 
 f.close()
