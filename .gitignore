@@ -11,6 +11,8 @@ PIN
 CODE
 TOKEN
 REFRESH_TOKEN
+nget_conditions.py
+nget_forecast.py
 iconset9
 iconset11
 Notes.md
