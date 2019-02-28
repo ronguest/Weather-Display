@@ -5,7 +5,7 @@ import json
 #import keys
 import credentials
 
-URL='https://api.ambientweather.net/v1/devices/08:D8:33:44:63:13?applicationKey='+credentials.AW_APP_KEY+'&apiKey='+credentials.AW_API_KEY+'&limit=1'
+URL='https://api.ambientweather.net/v1/devices/' + credentials.AW_DEVICE + '?applicationKey=' + credentials.AW_APP_KEY + '&apiKey=' + credentials.AW_API_KEY + '&limit=1'
 
 f = urllib2.urlopen(URL)
 json_string = f.read()

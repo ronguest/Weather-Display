@@ -16,7 +16,7 @@ https://learn.adafruit.com/adafruit-2-8-tft-touch-shield-v2/capacitive-touchscre
 
 * Touching the display causes the bottom portion to rotate between Tomorrow's forecast, indoor data, and details about today
 
-* Linux side is using JSON from weather underground to fetch conditions and forecast data
+* Linux side is using JSON from Weather Underground and Ambient Weather to fetch conditions and forecast data
 http://www.wunderground.com/weather/api/d/436da0958aa624c8/edit.html
 
 * There is no installer, just have to put everything in its place manually
