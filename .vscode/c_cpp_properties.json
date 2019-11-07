@@ -1,0 +1,66 @@
+{
+    "configurations": [
+        {
+            "name": "!!! WARNING !!! AUTO-GENERATED FILE, PLEASE DO NOT MODIFY IT AND USE https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags"
+        },
+        {
+            "name": "Mac",
+            "macFrameworkPath": [],
+            "includePath": [
+                "/Users/ronaldg/Documents/Arduino/Weather Display/src",
+                "/Users/ronaldg/Documents/Arduino/Weather Display/.pio/libdeps/yun/Adafruit FT6206 Library_ID701",
+                "/Users/ronaldg/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/Wire/src",
+                "/Users/ronaldg/Documents/Arduino/Weather Display/.pio/libdeps/yun/Adafruit ILI9341_ID571",
+                "/Users/ronaldg/Documents/Arduino/Weather Display/.pio/libdeps/yun/Adafruit GFX Library_ID13",
+                "/Users/ronaldg/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/SPI/src",
+                "/Users/ronaldg/Documents/Arduino/Weather Display/.pio/libdeps/yun/Bridge_ID945/src",
+                "/Users/ronaldg/.platformio/packages/framework-arduinoavr/cores/arduino",
+                "/Users/ronaldg/.platformio/packages/framework-arduinoavr/variants/yun",
+                "/Users/ronaldg/.platformio/lib/Time_ID44",
+                "/Users/ronaldg/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/EEPROM/src",
+                "/Users/ronaldg/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/HID/src",
+                "/Users/ronaldg/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/SoftwareSerial/src",
+                "/Users/ronaldg/.platformio/packages/tool-unity",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/Users/ronaldg/Documents/Arduino/Weather Display/src",
+                    "/Users/ronaldg/Documents/Arduino/Weather Display/.pio/libdeps/yun/Adafruit FT6206 Library_ID701",
+                    "/Users/ronaldg/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/Wire/src",
+                    "/Users/ronaldg/Documents/Arduino/Weather Display/.pio/libdeps/yun/Adafruit ILI9341_ID571",
+                    "/Users/ronaldg/Documents/Arduino/Weather Display/.pio/libdeps/yun/Adafruit GFX Library_ID13",
+                    "/Users/ronaldg/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/SPI/src",
+                    "/Users/ronaldg/Documents/Arduino/Weather Display/.pio/libdeps/yun/Bridge_ID945/src",
+                    "/Users/ronaldg/.platformio/packages/framework-arduinoavr/cores/arduino",
+                    "/Users/ronaldg/.platformio/packages/framework-arduinoavr/variants/yun",
+                    "/Users/ronaldg/.platformio/lib/Time_ID44",
+                    "/Users/ronaldg/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/EEPROM/src",
+                    "/Users/ronaldg/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/HID/src",
+                    "/Users/ronaldg/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/SoftwareSerial/src",
+                    "/Users/ronaldg/.platformio/packages/tool-unity",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=40003",
+                "ARDUINO_AVR_YUN",
+                "F_CPU=16000000L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10805",
+                "USB_VID=0x2341",
+                "USB_PID=0x0041",
+                "USB_PRODUCT=\"Arduino Yun\"",
+                "USB_MANUFACTURER=\"Arduino\"",
+                "__AVR_ATmega32U4__",
+                ""
+            ],
+            "intelliSenseMode": "clang-x64",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "compilerPath": "\"/Users/ronaldg/.platformio/packages/toolchain-atmelavr/bin/avr-gcc\" -mmcu=atmega32u4"
+        }
+    ],
+    "version": 4
+}

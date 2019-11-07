@@ -43,7 +43,7 @@ void setup() {
   tft.setTextSize(extrasTextSize-1);
   tft.setTextColor(ILI9341_GREEN);
   tft.println("Please wait");
-  for (int i=0; i < 5; i++) {
+  for (int i=0; i < 15; i++) {
     tft.print(".");
     delay(1000);        // Seems to be a startup issue when first powered on, maybe a delay getting the SD card going?
   }
